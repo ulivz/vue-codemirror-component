@@ -1,9 +1,11 @@
 <p align="center">
   <img alt="logo.svg" width="300" src="https://cdn.rawgit.com/ulivz/v-codemirror/master/media/logo.svg">
-  <div style="color: #d73a49">A laconic codemirror component for Vue.js</div>
 </p>
 
-> 
+<p align="center" style="color: #d73a49">
+  A laconic codemirror component for Vue.js
+</p>
+
 
 <br/>
 
