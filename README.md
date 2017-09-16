@@ -44,11 +44,11 @@ A simple usage example as follows:
 
 ### props
 
-Name|Is Required|Type|Description|Default
+Name|Required|Type|Description|Default
 ---|:---:|:---:|---|:---:
-v-model|N|_String_|Code string value, It will work on two-way data binding, so you needn't watch the code value's change|-
-value|N|_String_|Code string value, If you use `value` mode, you need to watch the value's change manually|-
-options|N|_Object_|Editor config, please refer to [codemirror config](http://codemirror.net/doc/manual.html#config) 
+`v-model`|N|_String_|Code string value, It will work on two-way data binding, so you needn't watch the code value's change|-
+`value`|N|_String_|Code string value, If you use `value` mode, you need to watch the value's change manually|-
+`options`|N|_Object_|Editor config, please refer to [codemirror-config](http://codemirror.net/doc/manual.html#config)| `{tabSize: 2, mode: 'text/javascript', theme: 'monokai'}`
 
 ## event
 
