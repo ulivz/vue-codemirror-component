@@ -22,7 +22,6 @@ A simple usage example as follows:
   import VCodemirror from 'v-codemirror'
 
   export default {
-    name: 'simple',
     components: {
       'V-Codemirror': VCodemirror
     },
