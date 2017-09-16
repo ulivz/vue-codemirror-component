@@ -1,5 +1,8 @@
 <img alt="logo.svg" width="300" src="https://cdn.rawgit.com/ulivz/v-codemirror/master/media/logo.svg">
+
 > A laconic codemirror component for Vue.js
+
+---
 
 ## Quick Start
 
