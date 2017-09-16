@@ -1,7 +1,6 @@
 # v-codemirror
-A laconic codemirror component for Vue.js
+> A laconic codemirror component for Vue.js
 
-> A editor
 
 ## Quick Start
 
