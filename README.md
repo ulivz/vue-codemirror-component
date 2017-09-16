@@ -1,6 +1,7 @@
 # v-codemirror
 > A laconic codemirror component for Vue.js
 
+<img alt="logo.svg" width="500" src="https://cdn.rawgit.com/ulivz/v-codemirror/master/media/logo.svg">
 
 ## Quick Start
 
@@ -47,7 +48,7 @@ Name|Required|Type|Description|Default
 `value`|N|_String_| Code string value, If you use `value` mode, you need to watch the value's change manually |-
 `options`|N|_Object_| Editor config, please move to [codemirror-config](http://codemirror.net/doc/manual.html#config) to get detailed configuration list | `{tabSize: 2, mode: 'text/javascript', theme: 'monokai'}`
 
-> Property `v-model` and `value` are forced alternative.
+Property `v-model` and `value` are forced alternative.
 
 ## event
 
@@ -57,5 +58,5 @@ Event Name| Description | Callback Value
 ---|---|---
 `change` | Fires every time the content of the editor content is changed. | Current code string
 
-> The detailed event list and their docs can refer to [codemirror-event](http://codemirror.net/doc/manual.html#events)
+The detailed event list and their docs can refer to [codemirror-event](http://codemirror.net/doc/manual.html#events)
 

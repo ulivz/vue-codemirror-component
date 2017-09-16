@@ -38,7 +38,7 @@
     data() {
       return {
         opts: {
-          showToolkit: false,
+          showToolkit: true,
           theme: DEFAULT_CONFIG.theme,
           mode: DEFAULT_CONFIG.mode,
           tabSize: 2
@@ -47,8 +47,7 @@
       }
     },
     created() {
-      this.opts = Object.assign(this.opts, this.options)
-      console.log( this.opts)
+      this.setOption(this.opts)
       this.loadDependencies(this.opts)
     },
     mounted () {
@@ -78,20 +77,22 @@
       redo() {
         this.editor.redo()
       },
+      setOption(opts) {
+        if (typeof opts === 'object') {
+          this.opts = Object.assign(this.opts, opts)
+        } else if (arguments.length >= 2) {
+          this.opts[arguments[0]] = arguments[1]
+        } else {
+          console.warn(`Invalid editor option: ${opts}`)
+        }
+      },
       updateEditor() {
         this.recycleEditor()
         this.loadDependencies(this.opts)
         this.initialize(this.opts)
       },
-      setTheme(theme) {
-        if (theme !== this.opts.theme) {
-          this.opts.theme = theme
-          this.updateEditor()
-        }
-      },
-
       recycleEditor() {
-        // garbage cleanup
+        // remove the old editor
         const element = this.editor.doc.cm.getWrapperElement()
         if (element && element.remove) {
           element.remove()
