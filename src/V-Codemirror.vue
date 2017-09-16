@@ -1,77 +1,68 @@
 <template>
-    <textarea></textarea>
+  <div class="evue-editor">
+    <textarea ref="editor"></textarea>
+    <slot name="theme-toolkit">
+      <div v-if="opts.showToolkit" class="theme-toolkit">
+        <span class="set-theme">Set theme: </span>
+        <select v-model="opts.theme" @change="updateEditor">
+          <option v-for="themeItem in themeList" v-bind:value="themeItem">
+            {{ themeItem }}
+          </option>
+        </select>
+      </div>
+    </slot>
+  </div>
 </template>
 
 <script>
   import CodeMirror from 'codemirror'
   import 'codemirror/lib/codemirror.css'
   import 'codemirror/mode/meta'
-  import {findMode, toArray} from './util'
+  import {findMode} from './util'
   import DEFAULT_CONFIG from './config/default.json'
-  window.CodeMirror = CodeMirror
+  import THEME_CONFIG from '../src/config/theme.json'
 
-  const EDITOR_OPTIONS = {
-    lineNumbers: true,
-    lineWrapping: false,
-    theme: DEFAULT_CONFIG.theme,
-    mode: DEFAULT_CONFIG.mode,
-  }
+  const props = {
+    value: String,
+    marker: Function,
+    unseenLines: Array,
+    options: {
+      type: Object,
+      required: true
+    },
+  };
 
   export default {
-    name: 'evue',
+    name: 'V-Codemirror',
+    props,
     data() {
       return {
-        content: ''
+        opts: {
+          showToolkit: false,
+          theme: DEFAULT_CONFIG.theme,
+          mode: DEFAULT_CONFIG.mode,
+          tabSize: 2
+        },
+        themeList: THEME_CONFIG
       }
     },
-    props: {
-      code: String,
-      unseenLines: Array,
-      marker: Function,
-      loadtheme: {
-        type: Boolean,
-        default: () => true
-      },
-      debugger: {
-        type: Boolean,
-        default: () => true
-      },
-      options: {
-        type: Object,
-        required: true
-      },
+    created() {
+      this.opts = Object.assign(this.opts, this.options)
+      console.log( this.opts)
+      this.loadDependencies(this.opts)
     },
-    computed: {
-      theme() {
-        return this.unoinOptions().theme
-      }
+    mounted () {
+      this.initialize(this.opts)
     },
-    created: function () {
-      this.loadDependencies(this.unoinOptions())
-    },
-    mounted: function () {
-      this.initialize(this.unoinOptions())
-    },
-    beforeDestroy: function () {
-     this.recycleEditor()
+    beforeDestroy () {
+      this.recycleEditor()
     },
     watch: {
-      // dynamic set options
-      options: {
-        deep: true,
-        handler(options, oldOptions) {
-          console.log(options)
-          var key
-          for (key in options) {
-            this.editor.setOption(key, options[key])
-          }
-        }
-      },
-      code: function (newVal, oldVal) {
+      code (newVal, oldVal) {
         if (newVal !== this.editor.getValue()) {
           var scrollInfo = this.editor.getScrollInfo()
           this.editor.setValue(newVal)
-          this.content = newVal
+          this.value = newVal
           this.editor.scrollTo(scrollInfo.left, scrollInfo.top)
         }
         this.unseenLineMarkers()
@@ -81,6 +72,24 @@
       refresh() {
         this.editor.refresh()
       },
+      undo() {
+        this.editor.undo()
+      },
+      redo() {
+        this.editor.redo()
+      },
+      updateEditor() {
+        this.recycleEditor()
+        this.loadDependencies(this.opts)
+        this.initialize(this.opts)
+      },
+      setTheme(theme) {
+        if (theme !== this.opts.theme) {
+          this.opts.theme = theme
+          this.updateEditor()
+        }
+      },
+
       recycleEditor() {
         // garbage cleanup
         const element = this.editor.doc.cm.getWrapperElement()
@@ -91,39 +100,25 @@
       unseenLineMarkers () {
         if (this.unseenLines !== undefined && this.marker !== undefined) {
           this.unseenLines.forEach(line => {
-            console.warn(line)
             var info = this.editor.lineInfo(line)
             this.editor.setGutterMarker(line, "breakpoints", info.gutterMarkers ? null : this.marker())
           })
         }
       },
-      unoinOptions(ob) {
-        return Object.assign({}, EDITOR_OPTIONS, this.options, ob || {})
-      },
-      setTheme(theme) {
-        if (theme !== this.theme) {
-          let options = this.unoinOptions({ theme })
-          this.recycleEditor()
-          this.loadDependencies(options)
-          this.initialize(options)
-        }
-      },
-      loadDependencies(editorOptions) {
-        let options = editorOptions;
+      loadDependencies(opts) {
+        const options = opts;
+        const isCustomMode = !!CodeMirror.modes[mode]
         let theme = options.theme
         let mode = options.mode
-        let openDebugger = this.debugger
-        let loadTheme = this.loadtheme
-        let isCustomMode = !!CodeMirror.modes[mode]
 
         // theme config
         if (theme && theme == 'solarized light') {
           theme = 'solarized'
         }
 
-        mode = findMode(mode)
+        mode = findMode(CodeMirror, mode)
 
-        if ((!mode || mode == 'null') && openDebugger && !isCustomMode) {
+        if ((!mode || mode == 'null') && !isCustomMode) {
           console.warn('CodeMirror language mode: ' + mode + ' configuration error (CodeMirror language mode configuration error，or unsupported language) refer to http://codemirror.net/mode/ for more details.')
           // return false
         }
@@ -134,17 +129,19 @@
         }
 
         // require theme
-        if (theme && loadTheme) {
+        if (theme) {
           require('codemirror/theme/' + theme + '.css')
         }
       },
-      initialize(editorOptions) {
-        this.editor = CodeMirror.fromTextArea(this.$el, editorOptions)
-        this.editor.setValue(this.code || this.content)
+      initialize(editorOpts) {
+        this.editor = CodeMirror.fromTextArea(this.$refs.editor, editorOpts)
+        this.editor.setValue(this.code || this.value)
         this.editor.on('change', (cm) => {
-          this.content = cm.getValue()
+//                    this.value = cm.getValue()
+          let val = cm.getValue()
           if (!!this.$emit) {
-            this.$emit('input', this.content)
+            this.$emit('input', val)
+            this.$emit('change', val)
           }
         })
         var events = [
@@ -182,3 +179,21 @@
     }
   }
 </script>
+
+<style scoped>
+  .evue-editor {
+    height: 100%;
+    width: 100%;
+  }
+
+  .theme-toolkit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .theme-toolkit .set-theme {
+    color: #fff;
+  }
+</style>

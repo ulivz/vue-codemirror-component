@@ -1,6 +1,6 @@
 {
-  "name": "evue",
-  "description": "A editor",
+  "name": "v-codemirror",
+  "description": "A laconic codemirror component for Vue.js",
   "version": "1.0.0",
   "author": "chl814@foxmail.com",
   "private": true,
@@ -9,10 +9,10 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "codemirror": "^5.29.0",
-    "vue": "^2.3.3"
+    "codemirror": "^5.29.0"
   },
   "devDependencies": {
+    "vue": "^2.3.3",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",

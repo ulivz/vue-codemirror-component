@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import '../src/polyfill'
+import simple from '../examples/simple.vue'
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(simple)
 })

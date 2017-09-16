@@ -1,12 +1,10 @@
-import CodeMirror from 'codemirror'
-
 /**
  * find mode for CodeMirror
  *
  * @param mode
  * @returns {*}
  */
-export function findMode(mode) {
+export function findMode(CodeMirror, mode) {
 
   // mode string config
   if (typeof mode == 'string') {
@@ -50,22 +48,12 @@ export function findMode(mode) {
 }
 
 /**
- * Shadow extend
- * The {from}'s properties will cover the {to}'s properties
+ * transform array-like to array
  *
- * @param to
- * @param from
+ * @param arrayLike
+ * @return {*}
  */
-export function extend(to, from) {
-  for (let key of Object.keys(from)) {
-    to[key] = from[key]
-  }
-}
 
 export function toArray(arrayLike) {
   return [].slice.call(arrayLike)
 }
-
-
-
-
