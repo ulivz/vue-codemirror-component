@@ -47,7 +47,7 @@
       }
     },
     created() {
-      this.setOption(this.opts)
+      this.setOption(this.options)
       this.loadDependencies(this.opts)
     },
     mounted () {
@@ -79,7 +79,7 @@
       },
       setOption(opts) {
         if (typeof opts === 'object') {
-          this.opts = Object.assign(this.opts, opts)
+          this.opts = Object.assign({}, this.opts, opts)
         } else if (arguments.length >= 2) {
           this.opts[arguments[0]] = arguments[1]
         } else {

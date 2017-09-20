@@ -26,6 +26,7 @@
       return {
         code: 'Welcome to Your Vue.js App',
         editorOpts: {
+          theme: 'mdn-like',
           showToolkit: true,
           styleActiveLine: true,
 //          keyMap: "sublime",
