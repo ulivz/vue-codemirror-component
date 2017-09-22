@@ -17,7 +17,6 @@
 <script>
   import {VCodemirror} from '../index.js'
 
-
   export default {
     name: 'app',
     components: {
