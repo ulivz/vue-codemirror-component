@@ -57,7 +57,7 @@
       this.recycleEditor()
     },
     watch: {
-      code (newVal, oldVal) {
+      value (newVal, oldVal) {
         if (newVal !== this.editor.getValue()) {
           var scrollInfo = this.editor.getScrollInfo()
           this.editor.setValue(newVal)

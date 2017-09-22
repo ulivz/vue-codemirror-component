@@ -11,6 +11,46 @@
 
 ## Quick Start
 
+If you use `webpack`, you need install `css-loader` and `style-loader` first:
+
+```bash
+npm install --save-dev css-loader style-loader
+``` 
+
+And add config in your `webpack.config.js`:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      }
+    ]
+  }
+}
+```
+
+If you want to register `V-Codemirror` as a global component, you can use:
+
+```js
+import VCodemirror from 'v-codemirror' // default export is the install function
+Vue.use(VCodemirror)
+```
+
+Or If you don't want to pollute the global scope, you can register it when you want to use it:
+
+```js
+  import {VCodemirror} from 'v-codemirror' // VCodemirror is a property i
+  export default {
+    name: 'app',
+    components: {
+      'V-Codemirror': VCodemirror
+    }
+  }  
+```
+
 A simple usage example as follows:
 
 ```vue

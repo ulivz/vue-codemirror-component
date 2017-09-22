@@ -15,7 +15,8 @@
 </template>
 
 <script>
-  import VCodemirror from '../src/V-Codemirror.vue'
+  import {VCodemirror} from '../index.js'
+
 
   export default {
     name: 'app',
