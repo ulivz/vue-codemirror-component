@@ -27,8 +27,7 @@
     marker: Function,
     unseenLines: Array,
     options: {
-      type: Object,
-      required: true
+      type: Object
     },
   };
 

@@ -1,11 +1,10 @@
 {
   "name": "v-codemirror",
   "description": "A laconic codemirror component for Vue.js",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "author": "chl814@foxmail.com",
-  "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --port 1994 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
