@@ -35,14 +35,14 @@ module.exports = {
 If you want to register `V-Codemirror` as a global component, you can use:
 
 ```js
-import VCodemirror from 'v-codemirror' // default export is the install function
-Vue.use(VCodemirror)
+  import VCodemirror from 'v-codemirror' // default export is the install function
+  Vue.use(VCodemirror)
 ```
 
 Or If you don't want to pollute the global scope, you can register it when you want to use it:
 
 ```js
-  import {VCodemirror} from 'v-codemirror' // VCodemirror is a property i
+  import {VCodemirror} from 'v-codemirror' // VCodemirror is a property in export object
   export default {
     name: 'app',
     components: {
