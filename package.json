@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port 1994 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "release": "node build/release.js"
+    "release": "node build/release.js",
+    "commit": "git-cz"
   },
   "dependencies": {
     "codemirror": "^5.29.0"
@@ -16,8 +17,10 @@
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",
     "chalk": "^2.1.0",
+    "commitizen": "^2.9.6",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
+    "cz-conventional-changelog": "^2.0.0",
     "file-loader": "^0.9.0",
     "inquirer": "^3.3.0",
     "node-sass": "^4.5.0",
@@ -31,5 +34,10 @@
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "yargs": "^9.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
