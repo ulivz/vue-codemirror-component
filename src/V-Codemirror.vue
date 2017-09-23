@@ -1,16 +1,6 @@
 <template>
-  <div class="evue-editor">
+  <div class="evue-editor" style="height: 100%; width: 100%">
     <textarea ref="editor"></textarea>
-    <slot name="theme-toolkit">
-      <div v-if="opts.showToolkit" class="theme-toolkit">
-        <span class="set-theme">Set theme: </span>
-        <select v-model="opts.theme" @change="updateEditor">
-          <option v-for="themeItem in themeList" v-bind:value="themeItem">
-            {{ themeItem }}
-          </option>
-        </select>
-      </div>
-    </slot>
   </div>
 </template>
 
@@ -179,21 +169,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .evue-editor {
-    height: 100%;
-    width: 100%;
-  }
-
-  .theme-toolkit {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  .theme-toolkit .set-theme {
-    color: #fff;
-  }
-</style>
