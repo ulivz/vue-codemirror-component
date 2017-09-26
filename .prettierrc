@@ -1,0 +1,8 @@
+# .prettierrc
+tabWidth: 2
+useTabs: false
+semi: false
+singleQuote: true
+bracketSpacing: true
+#requirePragma: true
+trailingComma: es5 # "<none|es5|all>"

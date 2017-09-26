@@ -1,5 +1,5 @@
 <template>
-  <div class="evue-editor" style="height: 100%; width: 100%">
+  <div class="V-Codemirror" style="height: 100%; width: 100%">
     <textarea ref="editor"></textarea>
   </div>
 </template>
@@ -81,7 +81,6 @@
         this.initialize(this.opts)
       },
       recycleEditor() {
-        // remove the old editor
         const element = this.editor.doc.cm.getWrapperElement()
         if (element && element.remove) {
           element.remove()
@@ -110,7 +109,6 @@
 
         if ((!mode || mode == 'null') && !isCustomMode) {
           console.warn('CodeMirror language mode: ' + mode + ' configuration error (CodeMirror language mode configuration error，or unsupported language) refer to http://codemirror.net/mode/ for more details.')
-          // return false
         }
 
         // require language

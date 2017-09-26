@@ -16,6 +16,9 @@
 
 <script>
   import {VCodemirror} from '../index.js'
+  import {findMode} from '../index.js'
+
+  console.log(findMode('Javascript'))
 
   export default {
     name: 'app',

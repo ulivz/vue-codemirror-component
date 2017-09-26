@@ -5,15 +5,15 @@
  * @returns {*}
  */
 export function findMode(CodeMirror, mode) {
-
   // mode string config
   if (typeof mode == 'string') {
     var lang = CodeMirror.findModeByMIME(mode)
+    console.log(lang)
     mode = !lang ? lang : lang.mode
+    console.log(mode)
 
     // mode object config
   } else if (typeof mode == 'object') {
-
     if (mode.name) {
       var lang = CodeMirror.findModeByName(mode.name)
       if (lang) {
@@ -44,7 +44,8 @@ export function findMode(CodeMirror, mode) {
       }
     }
   }
-  return mode;
+  console.log(mode)
+  return mode
 }
 
 /**
