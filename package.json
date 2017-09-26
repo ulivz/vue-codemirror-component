@@ -1,13 +1,16 @@
 {
   "name": "v-codemirror",
   "description": "A laconic codemirror component for Vue.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "chl814@foxmail.com",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port 1994 --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "semantic-release": "node_modules/.bin/semantic-release pre && npm publish && semantic-release post",
     "release": "node build/release.js",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "eslint": "eslint src/**/*.js",
+    "prettier": "prettier --config .prettierrc --write ./src/*.js ./src/**/*.json"
   },
   "dependencies": {
     "codemirror": "^5.29.0"
@@ -21,11 +24,14 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "cz-conventional-changelog": "^2.0.0",
+    "eslint": "^4.7.2",
     "file-loader": "^0.9.0",
     "inquirer": "^3.3.0",
     "node-sass": "^4.5.0",
     "ora": "^1.3.0",
+    "prettier": "^1.7.0",
     "sass-loader": "^5.0.1",
+    "semantic-release": "^8.0.3",
     "shelljs": "^0.7.8",
     "style-loader": "^0.18.2",
     "vue": "^2.3.3",
