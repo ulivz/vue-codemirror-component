@@ -17,6 +17,8 @@
   "dependencies": {
     "codemirror": "^5.29.0"
   },
+  "main": "dist/v-codemirror.common.js",
+  "module": "dist/v-codemirror.es.js",
   "files": [
     "src",
     "media",
