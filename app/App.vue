@@ -15,10 +15,7 @@
 </template>
 
 <script>
-  import {VCodemirror} from '../index.js'
-  import {findMode} from '../index.js'
-
-  console.log(findMode('Javascript'))
+  import {VCodemirror} from '../dist/v-codemirror.es.js'
 
   export default {
     name: 'app',

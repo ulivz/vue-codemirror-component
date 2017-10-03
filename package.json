@@ -4,27 +4,35 @@
   "version": "1.0.7",
   "author": "chl814@foxmail.com",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --port 1994 --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "example:dev": "cross-env NODE_ENV=development webpack-dev-server --port 1994 --open --hot",
+    "example:build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "build": "bili",
     "semantic-release": "node_modules/.bin/semantic-release pre && npm publish && semantic-release post",
     "release": "node build/release.js",
     "commit": "git-cz",
-    "eslint": "eslint src/**/*.js",
+    "eslint": "eslint *.js src/**/*.js",
+    "eslint:fix": "eslint --fix src/**/*.js",
     "prettier": "prettier --config .prettierrc --write ./src/*.js ./src/**/*.json"
   },
   "dependencies": {
     "codemirror": "^5.29.0"
   },
+  "files": [
+    "src",
+    "media",
+    "dist"
+  ],
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",
+    "bili": "^0.18.1",
     "chalk": "^2.1.0",
     "commitizen": "^2.9.6",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "cz-conventional-changelog": "^2.0.0",
-    "eslint": "^4.7.2",
+    "eslint": "^4.8.0",
     "file-loader": "^0.9.0",
     "inquirer": "^3.3.0",
     "node-sass": "^4.5.0",

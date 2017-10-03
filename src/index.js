@@ -3,13 +3,13 @@
  * (c) 2016-2017 ulivz <Luke Chen>
  * Released under the MIT License.
  */
-import VCodemirror from './src/V-Codemirror.js'
-import THEME from './src/config/theme.json'
+import VCodemirror from './V-Codemirror.js'
+import THEME from './config/theme.json'
 import Codemirror from 'codemirror'
-import {findMode} from './src/util'
+import {findMode} from './util'
 
 function install(Vue) {
-	Vue.component(VCodemirror.name, VCodemirror)
+  Vue.component(VCodemirror.name, VCodemirror)
 }
 
 const findModeByMIME = Codemirror.findModeByMIME
@@ -18,12 +18,12 @@ const findModeByFileName = Codemirror.findModeByFileName
 const findModeByName = Codemirror.findModeByName
 
 export {
-	install as default,
-	VCodemirror,
-	THEME,
-	findMode,
-	findModeByMIME,
-	findModeByExtension,
-	findModeByFileName,
-	findModeByName
+  install as default,
+  VCodemirror,
+  THEME,
+  findMode,
+  findModeByMIME,
+  findModeByExtension,
+  findModeByFileName,
+  findModeByName
 }
