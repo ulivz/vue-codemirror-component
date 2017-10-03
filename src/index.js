@@ -3,7 +3,7 @@
  * (c) 2016-2017 ulivz <Luke Chen>
  * Released under the MIT License.
  */
-import VCodemirror from './src/V-Codemirror.vue'
+import VCodemirror from './src/V-Codemirror.js'
 import THEME from './src/config/theme.json'
 import Codemirror from 'codemirror'
 import {findMode} from './src/util'

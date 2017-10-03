@@ -22,6 +22,7 @@
   };
 
   export default {
+    
     name: 'V-Codemirror',
     props,
     data() {
