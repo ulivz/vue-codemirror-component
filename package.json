@@ -17,7 +17,7 @@
   "dependencies": {
     "codemirror": "^5.29.0"
   },
-  "main": "dist/v-codemirror.common.js",
+  "main": "dist/v-codemirror.js",
   "module": "dist/v-codemirror.es.js",
   "files": [
     "src",
@@ -28,7 +28,7 @@
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",
-    "bili": "^0.18.1",
+    "bili": "^2.2.0",
     "chalk": "^2.1.0",
     "commitizen": "^2.9.6",
     "cross-env": "^3.0.0",
