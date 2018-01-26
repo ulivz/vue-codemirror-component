@@ -2,8 +2,8 @@ import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/meta'
 import {findMode} from './util'
-import DEFAULT_CONFIG from './config/default.json'
-import THEME_CONFIG from '../src/config/theme.json'
+import DEFAULT_CONFIG from './config/default'
+import THEME_CONFIG from './config/theme'
 
 export default {
 

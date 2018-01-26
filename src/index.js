@@ -1,10 +1,5 @@
-/*!
- * V-Codemirror v1.0.0
- * (c) 2016-2017 ulivz <Luke Chen>
- * Released under the MIT License.
- */
 import VCodemirror from './V-Codemirror.js'
-import THEME from './config/theme.json'
+import THEME from './config/theme'
 import Codemirror from 'codemirror'
 import {findMode} from './util'
 
