@@ -5,8 +5,7 @@ module.exports = {
   resolve: false, // rollup-plugin-commonjs
   exports: 'named',
   moduleName: pkg.name,
-  format: 'es,cjs',
-  compress: 'cjs',
+  format: 'es,cjs,umd',
   banner: {
     name: 'handlebars2',
     version: pkg.version,

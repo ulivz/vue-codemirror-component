@@ -2,8 +2,9 @@ import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/meta'
 import {findMode} from './util'
-import DEFAULT_CONFIG from './config/default'
-import THEME_CONFIG from './config/theme'
+import defaultConfig from './config/default'
+import themeList from './config/theme'
+import events from './config/events'
 
 export default {
 
@@ -24,11 +25,11 @@ export default {
     return {
       opts: {
         showToolkit: true,
-        theme: DEFAULT_CONFIG.theme,
-        mode: DEFAULT_CONFIG.mode,
+        theme: defaultConfig.theme,
+        mode: defaultConfig.mode,
         tabSize: 2
       },
-      themeList: THEME_CONFIG
+      themeList
     }
   },
 
@@ -136,31 +137,12 @@ export default {
       this.editor.setValue(this.code || this.value)
       this.editor.on('change', (cm) => {
         //                    this.value = cm.getValue()
-        let val = cm.getValue()
+        const val = cm.getValue()
         if (this.$emit) {
           this.$emit('input', val)
           this.$emit('change', val)
         }
       })
-      var events = [
-        'changes',
-        'beforeChange',
-        'cursorActivity',
-        'keyHandled',
-        'inputRead',
-        'electricInput',
-        'beforeSelectionChange',
-        'viewportChange',
-        'swapDoc',
-        'gutterClick',
-        'gutterContextMenu',
-        'focus',
-        'blur',
-        'refresh',
-        'optionChange',
-        'scrollCursorIntoView',
-        'update'
-      ]
       events.forEach(event => {
         this.editor.on(event, (a, b, c) => {
           this.$emit(event, a, b, c)
