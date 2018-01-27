@@ -16,7 +16,7 @@ const findModeByName = Codemirror.findModeByName
 export {
   // Current available modes
   modes,
-  // Current available MIME
+  // Current available MIMEs
   mimeModes,
   install as default,
   VCodemirror,

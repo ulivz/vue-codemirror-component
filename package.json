@@ -14,7 +14,8 @@
     "prettier": "prettier --config .prettierrc --write ./src/*.js ./src/**/*.json"
   },
   "dependencies": {
-    "codemirror": "^5.29.0"
+    "codemirror": "^5.29.0",
+    "loadjs": "^3.5.2"
   },
   "main": "dist/v-codemirror.js",
   "module": "dist/v-codemirror.es.js",

@@ -4,6 +4,7 @@ const pkg = require('./package')
 
 module.exports = {
   entry: 'src/dev/index.js',
+  templateCompiler: true,
   extendWebpack(config) {
     // Improve build performance.
     config.module.set('noParse', /babel-preset-vue/)
@@ -16,8 +17,22 @@ module.exports = {
     config.node.set('fs', 'empty')
 
   },
+  filename: {
+    chunk: '[name].chunk.js',
+    vendor: '[name].vendor.js',
+    client: 'v-codemirror.core.js',
+  },
+  copy: [
+    {
+      from: './node_modules/codemirror/mode', to: 'mode'
+    },
+    {
+      from: './node_modules/codemirror/theme', to: 'theme'
+    }
+  ],
   production: {
-    sourceMap: false
+    sourceMap: false,
+    extractCSS: false
   },
   hash: false,
   homepage: '/',
@@ -35,6 +50,5 @@ module.exports = {
     presets: [
       require.resolve('babel-preset-poi')
     ]
-  },
-  templateCompiler: true
+  }
 }

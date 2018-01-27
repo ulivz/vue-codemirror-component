@@ -5,6 +5,25 @@ import { findMode } from './util'
 import defaultConfig from './config/default'
 import themeList from './config/theme'
 import events from './config/events'
+import loadjs from 'loadjs'
+
+function asyncLoad(resources, name) {
+  return new Promise((resolve, reject) => {
+    if (loadjs.isDefined(name)) {
+      resolve()
+    } else {
+      loadjs(resources, name, {
+        success() {
+          resolve()
+        },
+        error() {
+          progress.done()
+          reject(new Error('network error'))
+        }
+      })
+    }
+  })
+}
 
 export default {
 
@@ -125,12 +144,12 @@ export default {
 
       // require language
       if (mode && mode !== 'null') {
-        LoadPromises.push(import('codemirror/mode/' + mode + '/' + mode + '.js'))
+        LoadPromises.push(asyncLoad('./mode/' + mode + '/' + mode + '.js'))
       }
 
       // require theme
       if (theme) {
-        LoadPromises.push(import('codemirror/theme/' + theme + '.css'))
+        LoadPromises.push(asyncLoad('./theme/' + theme + '.css'))
       }
 
       return Promise.all(LoadPromises)
