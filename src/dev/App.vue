@@ -5,6 +5,7 @@
                           :options="editorOpts"
                           @change="handleCodeChange">
             </V-Codemirror>
+
         </div>
         <div class="preview-wrap">
             <div class="markdown-body">
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-  import {VCodemirror} from '../dist/v-codemirror.es.js'
+  import { VCodemirror, modes, mimeModes } from '../index'
 
   export default {
     name: 'app',
@@ -26,7 +27,7 @@
       return {
         code: 'Welcome to Your Vue.js App',
         editorOpts: {
-          theme: 'default',
+          theme: '3024-day',
           showToolkit: true,
           styleActiveLine: true,
 //          keyMap: "sublime",
@@ -39,7 +40,7 @@
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           // 选中文本自动高亮，及高亮方式
           styleSelectedText: true,
-          highlightSelectionMatches: {showToken: /\w/, annotateScrollbar: true},
+          highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
           // more codemirror options...
           // 如果有hint方面的配置，也应该出现在这里
           hintOptions: {
@@ -87,6 +88,7 @@
         height: 100%;
         overflow: auto;
         .CodeMirror {
+            padding: 45px;
             font-size: 18px;
             height: 100%;
         }
@@ -108,6 +110,9 @@
             }
             ol > li {
                 list-style-type: lower-roman;
+            }
+            pre {
+                margin: 0;
             }
         }
     }

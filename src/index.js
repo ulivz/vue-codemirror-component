@@ -1,7 +1,8 @@
 import VCodemirror from './V-Codemirror.js'
 import THEME from './config/theme'
 import Codemirror from 'codemirror'
-import {findMode} from './util'
+import { findMode } from './util'
+import { modes, mimeModes } from 'codemirror'
 
 function install(Vue) {
   Vue.component(VCodemirror.name, VCodemirror)
@@ -13,6 +14,10 @@ const findModeByFileName = Codemirror.findModeByFileName
 const findModeByName = Codemirror.findModeByName
 
 export {
+  // Current available modes
+  modes,
+  // Current available MIME
+  mimeModes,
   install as default,
   VCodemirror,
   THEME,

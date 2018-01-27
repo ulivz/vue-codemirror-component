@@ -1,7 +1,7 @@
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/meta'
-import {findMode} from './util'
+import { findMode } from './util'
 import defaultConfig from './config/default'
 import themeList from './config/theme'
 import events from './config/events'
@@ -121,15 +121,19 @@ export default {
         console.warn('CodeMirror language mode: ' + mode + ' configuration error (CodeMirror language mode configuration error，or unsupported language) refer to http://codemirror.net/mode/ for more details.')
       }
 
+      const LoadPromises = []
+
       // require language
       if (mode && mode !== 'null') {
-        require('codemirror/mode/' + mode + '/' + mode + '.js')
+        LoadPromises.push(import('codemirror/mode/' + mode + '/' + mode + '.js'))
       }
 
       // require theme
       if (theme) {
-        require('codemirror/theme/' + theme + '.css')
+        LoadPromises.push(import('codemirror/theme/' + theme + '.css'))
       }
+
+      return Promise.all(LoadPromises)
     },
 
     initialize(editorOpts) {
