@@ -18,35 +18,6 @@ module.exports = {
     config.node.set('fs', 'empty')
 
   },
-  filename: {
-    chunk: '[name].chunk.js',
-    vendor: '[name].vendor.js',
-    manifest: '[name].manifest.js',
-    client: '[name].client.js'
-  },
-  copy: [
-    {
-      from: './node_modules/codemirror/mode',
-      transform: (content, filepath) => {
-        if (process.env.NODE_ENV === 'production' && filepath.endsWith('.js')) {
-          let output = content
-          try {
-            const { code, map } = minify(content)
-            output = code
-          } catch (error) {
-            console.log(error)
-          }
-          return output
-        }
-        return content
-      },
-      to: 'mode'
-    },
-    {
-      from: './node_modules/codemirror/theme',
-      to: 'theme'
-    }
-  ],
   production: {
     sourceMap: false,
     extractCSS: false

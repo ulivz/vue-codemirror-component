@@ -1,25 +1,23 @@
 <template>
     <div id="app">
         <div class="editor-wrap">
-            <select name="" id="" v-model="theme">
-                <option v-for="theme in themes" value="">{{ theme }}</option>
+            <select v-model="theme">
+                <option v-for="theme in themes">{{ theme }}</option>
+            </select>
+            <select v-model="lang">
+                <option v-for="lang in languages">{{ lang }}</option>
             </select>
             <V-Codemirror v-model="code"
                           :theme="theme"
-                          :options="editorOpts"
-                          @change="handleCodeChange">
+                          :mode="lang"
+                          :options="editorOpts">
             </V-Codemirror>
-        </div>
-        <div class="preview-wrap">
-            <div class="markdown-body">
-                <pre>{{ code }}</pre>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
-  import { VCodemirror, themes, mimeModes } from '../index'
+  import { VCodemirror, themes, mimeModes, modes, languages } from '../index'
 
   export default {
     name: 'app',
@@ -28,9 +26,11 @@
     },
     data () {
       return {
-        code: 'I am a codemirror demo',
+        code: require('!raw-loader!../../index.html'),
         themes,
-        theme: '3024-day',
+        languages,
+        lang: 'html',
+        theme: 'monokai',
         editorOpts: {
           showToolkit: true,
           styleActiveLine: true,
@@ -51,11 +51,6 @@
             completeSingle: false
           }
         },
-      }
-    },
-    methods: {
-      handleCodeChange(val) {
-        console.log(val)
       }
     }
   }
@@ -88,7 +83,7 @@
     .editor-wrap {
         position: relative;
         float: left;
-        width: 50%;
+        width: 100%;
         height: 100%;
         overflow: auto;
         .CodeMirror {

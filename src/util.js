@@ -1,58 +1,34 @@
-/**
- * find mode for CodeMirror
- *
- * @param mode
- * @returns {*}
- */
-export function findMode(CodeMirror, mode) {
-  let lang
+import CodeMirror from 'codemirror'
+
+const {
+  findModeByName,
+  findModeByMIME,
+  findModeByExtension,
+  findModeByFileName
+} = CodeMirror
+
+export function normalizeModeName(mode) {
+  let modeOb
   // mode string config
   if (typeof mode == 'string') {
-    lang = CodeMirror.findModeByMIME(mode)
-    mode = !lang ? lang : lang.mode
+    modeOb = findModeByName(mode)
+      || findModeByMIME(mode)
+      || findModeByExtension(mode)
+      || findModeByFileName(mode)
 
-    // mode object config
   } else if (typeof mode == 'object') {
     if (mode.name) {
-      lang = CodeMirror.findModeByName(mode.name)
-      if (lang) {
-        mode = lang.mode
-      } else {
-        mode = null
-      }
+      modeOb = findModeByName(mode.name)
+
     } else if (mode.ext) {
-      lang = CodeMirror.findModeByExtension(mode.ext)
-      if (lang) {
-        mode = lang.mode
-      } else {
-        mode = null
-      }
+      modeOb = findModeByExtension(mode.ext)
+
     } else if (mode.mime) {
-      lang = CodeMirror.findModeByMIME(mode.mime)
-      if (lang) {
-        mode = lang.mode
-      } else {
-        mode = null
-      }
+      modeOb = findModeByMIME(mode.mime)
+
     } else if (mode.filename) {
-      lang = CodeMirror.findModeByFileName(mode.filename)
-      if (lang) {
-        mode = lang.mode
-      } else {
-        mode = null
-      }
+      modeOb = findModeByFileName(mode.filename)
     }
   }
-  return mode
-}
-
-/**
- * transform array-like to array
- *
- * @param arrayLike
- * @return {*}
- */
-
-export function toArray(arrayLike) {
-  return [].slice.call(arrayLike)
+  return modeOb && modeOb.mode
 }

@@ -1,5 +1,6 @@
 import VCodemirror from './V-Codemirror.js'
 import themes from './config/theme'
+import languages from './config/language'
 import Codemirror from 'codemirror'
 import { findMode } from './util'
 import { modes, mimeModes } from 'codemirror'
@@ -15,6 +16,7 @@ const findModeByName = Codemirror.findModeByName
 
 export {
   themes,
+  languages,
   // Current available modes
   modes,
   // Current available MIMEs

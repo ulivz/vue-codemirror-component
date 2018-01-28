@@ -1,7 +1,7 @@
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/meta'
-import { findMode } from './util'
+import { normalizeModeName } from './util'
 import defaultConfig from './config/default'
 import themes from './config/theme'
 import events from './config/events'
@@ -56,12 +56,16 @@ export default {
   },
 
   created() {
-    this.loadMode()
-    this.loadTheme()
+    this.loadPromises = Promise.all([
+      this.loadMode(),
+      this.loadTheme()
+    ])
   },
 
   mounted () {
-    this.initializeEditor(this.editorOptions)
+    this.loadPromises.then(() => {
+      this.initializeEditor(this.editorOptions)
+    })
   },
 
   beforeDestroy () {
@@ -70,7 +74,10 @@ export default {
 
   computed: {
     editorOptions() {
-      return Object.assign(DEFAULT_OPTIONS, this.options, this.theme)
+      return Object.assign(DEFAULT_OPTIONS, this.options, {
+        theme: this.theme || DEFAULT_OPTIONS.theme,
+        mode: normalizeModeName(this.mode) || DEFAULT_OPTIONS.mode,
+      })
     }
   },
 
@@ -85,9 +92,16 @@ export default {
       this.unseenLineMarkers()
     },
     theme(theme) {
-      console.log(theme)
+      this.editor.setOption('theme', theme)
+      this.loadTheme()
+        .then(() => this.editor.refresh())
+    },
+    mode(mode) {
+      mode = normalizeModeName(mode)
+      this.editor.setOption('mode', mode)
+      this.loadMode()
+        .then(() => this.editor.refresh())
     }
-
   },
 
   methods: {
@@ -106,12 +120,11 @@ export default {
 
     updateEditor() {
       this.recycleEditor()
-      this.loadMode()
-      this.loadTheme()
+      this.initializeEditor()
     },
 
     recycleEditor() {
-      const element = this.editor.doc.cm.getWrapperElement()
+      const element = this.editor.getWrapperElement()
       if (element && element.remove) {
         element.remove()
       }
@@ -133,21 +146,20 @@ export default {
         theme = 'solarized'
       }
       if (theme) {
-        return asyncLoad('./theme/' + theme + '.css')
+        return import('codemirror/theme/' + theme + '.css')
       }
     },
 
     loadMode() {
       let { mode } = this.editorOptions
       const isCustomMode = !!CodeMirror.modes[mode]
-      mode = findMode(CodeMirror, mode)
 
-      if ((!mode || mode == 'null') && !isCustomMode) {
+      if (!mode && !isCustomMode) {
         console.warn('CodeMirror language mode: ' + mode + ' configuration error (CodeMirror language mode configuration error，or unsupported language) refer to http://codemirror.net/mode/ for more details.')
       }
 
-      if (mode && mode !== 'null') {
-        return asyncLoad('./mode/' + mode + '/' + mode + '.js')
+      if (mode) {
+        return import('codemirror/mode/' + mode + '/' + mode + '.js')
       }
     },
 
@@ -173,7 +185,7 @@ export default {
       this.unseenLineMarkers()
 
       // prevents funky dynamic rendering
-      window.setTimeout(() => {
+      this.$nextTick(() => {
         this.editor.refresh()
       }, 0)
     }
