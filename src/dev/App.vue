@@ -1,11 +1,14 @@
 <template>
     <div id="app">
         <div class="editor-wrap">
+            <select name="" id="" v-model="theme">
+                <option v-for="theme in themes" value="">{{ theme }}</option>
+            </select>
             <V-Codemirror v-model="code"
+                          :theme="theme"
                           :options="editorOpts"
                           @change="handleCodeChange">
             </V-Codemirror>
-
         </div>
         <div class="preview-wrap">
             <div class="markdown-body">
@@ -16,7 +19,7 @@
 </template>
 
 <script>
-  import { VCodemirror, modes, mimeModes } from '../index'
+  import { VCodemirror, themes, mimeModes } from '../index'
 
   export default {
     name: 'app',
@@ -25,9 +28,10 @@
     },
     data () {
       return {
-        code: 'Welcome to Your Vue.js App',
+        code: 'I am a codemirror demo',
+        themes,
+        theme: '3024-day',
         editorOpts: {
-          theme: '3024-day',
           showToolkit: true,
           styleActiveLine: true,
 //          keyMap: "sublime",

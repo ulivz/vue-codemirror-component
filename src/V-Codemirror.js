@@ -3,7 +3,7 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/meta'
 import { findMode } from './util'
 import defaultConfig from './config/default'
-import themeList from './config/theme'
+import themes from './config/theme'
 import events from './config/events'
 import loadjs from 'loadjs'
 
@@ -25,6 +25,12 @@ function asyncLoad(resources, name) {
   })
 }
 
+const DEFAULT_OPTIONS = {
+  theme: defaultConfig.theme,
+  mode: defaultConfig.mode,
+  tabSize: 2
+}
+
 export default {
 
   template: `<div class="V-Codemirror" style="height: 100%; width: 100%">
@@ -36,33 +42,36 @@ export default {
   props: {
     value: String,
     marker: Function,
+    theme: String,
+    mode: String,
     unseenLines: Array,
     options: Object
   },
 
   data() {
     return {
-      opts: {
-        showToolkit: true,
-        theme: defaultConfig.theme,
-        mode: defaultConfig.mode,
-        tabSize: 2
-      },
-      themeList
+      code: this.value,
+      themes
     }
   },
 
   created() {
-    this.setOption(this.options)
-    this.loadDependencies(this.opts)
+    this.loadMode()
+    this.loadTheme()
   },
 
   mounted () {
-    this.initialize(this.opts)
+    this.initializeEditor(this.editorOptions)
   },
 
   beforeDestroy () {
     this.recycleEditor()
+  },
+
+  computed: {
+    editorOptions() {
+      return Object.assign(DEFAULT_OPTIONS, this.options, this.theme)
+    }
   },
 
   watch: {
@@ -74,7 +83,11 @@ export default {
         this.editor.scrollTo(scrollInfo.left, scrollInfo.top)
       }
       this.unseenLineMarkers()
+    },
+    theme(theme) {
+      console.log(theme)
     }
+
   },
 
   methods: {
@@ -91,20 +104,10 @@ export default {
       this.editor.redo()
     },
 
-    setOption(opts) {
-      if (typeof opts === 'object') {
-        this.opts = Object.assign({}, this.opts, opts)
-      } else if (arguments.length >= 2) {
-        this.opts[arguments[0]] = arguments[1]
-      } else {
-        console.warn(`Invalid editor option: ${opts}`)
-      }
-    },
-
     updateEditor() {
       this.recycleEditor()
-      this.loadDependencies(this.opts)
-      this.initialize(this.opts)
+      this.loadMode()
+      this.loadTheme()
     },
 
     recycleEditor() {
@@ -123,55 +126,50 @@ export default {
       }
     },
 
-    loadDependencies(opts) {
-      const options = opts
-      const isCustomMode = !!CodeMirror.modes[mode]
-      let theme = options.theme
-      let mode = options.mode
-
+    loadTheme() {
+      let { theme } = this.editorOptions
       // theme config
       if (theme && theme == 'solarized light') {
         theme = 'solarized'
       }
+      if (theme) {
+        return asyncLoad('./theme/' + theme + '.css')
+      }
+    },
 
+    loadMode() {
+      let { mode } = this.editorOptions
+      const isCustomMode = !!CodeMirror.modes[mode]
       mode = findMode(CodeMirror, mode)
 
       if ((!mode || mode == 'null') && !isCustomMode) {
         console.warn('CodeMirror language mode: ' + mode + ' configuration error (CodeMirror language mode configuration error，or unsupported language) refer to http://codemirror.net/mode/ for more details.')
       }
 
-      const LoadPromises = []
-
-      // require language
       if (mode && mode !== 'null') {
-        LoadPromises.push(asyncLoad('./mode/' + mode + '/' + mode + '.js'))
+        return asyncLoad('./mode/' + mode + '/' + mode + '.js')
       }
-
-      // require theme
-      if (theme) {
-        LoadPromises.push(asyncLoad('./theme/' + theme + '.css'))
-      }
-
-      return Promise.all(LoadPromises)
     },
 
-    initialize(editorOpts) {
-      this.editor = CodeMirror.fromTextArea(this.$refs.editor, editorOpts)
-      this.editor.setValue(this.code || this.value)
+    initializeEditor() {
+      this.editor = CodeMirror.fromTextArea(this.$refs.editor, this.editorOptions)
+      this.editor.setValue(this.code)
+
       this.editor.on('change', (cm) => {
-        //                    this.value = cm.getValue()
-        const val = cm.getValue()
-        if (this.$emit) {
-          this.$emit('input', val)
-          this.$emit('change', val)
-        }
+        this.code = cm.getValue()
+        const value = cm.getValue()
+        this.$emit('input', value)
+        this.$emit('change', value)
       })
+
       events.forEach(event => {
-        this.editor.on(event, (a, b, c) => {
-          this.$emit(event, a, b, c)
+        this.editor.on(event, (...args) => {
+          this.$emit(event, ...args)
         })
       })
+
       this.$emit('ready', this.editor)
+
       this.unseenLineMarkers()
 
       // prevents funky dynamic rendering
