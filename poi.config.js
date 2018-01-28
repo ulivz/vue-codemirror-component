@@ -3,8 +3,10 @@ const repoLatestCommit = require('repo-latest-commit')
 const pkg = require('./package')
 const minify = require('babel-minify')
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
-  entry: 'src/dev/index.js',
+  entry: isProd ? 'src/index.js' : 'src/dev/index.js',
   templateCompiler: true,
   extendWebpack(config) {
     // Improve build performance.
@@ -16,8 +18,11 @@ module.exports = {
       .add(nodeModules())
 
     config.node.set('fs', 'empty')
-
+    if (isProd) {
+      config.output.publicPath(process.env.CDN_ENV || 'https://unpkg.com/@' + pkg.version + pkg.name + '/dist')
+    }
   },
+  library: true,
   production: {
     sourceMap: false,
     extractCSS: false

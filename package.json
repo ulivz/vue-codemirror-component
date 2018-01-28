@@ -5,17 +5,13 @@
   "author": "chl814@foxmail.com",
   "scripts": {
     "dev": "poi",
-    "example:build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build": "poi build",
-    "semantic-release": "node_modules/.bin/semantic-release pre && npm publish && semantic-release post",
-    "release": "node build/release.js",
     "eslint": "eslint *.js src/**/*.js",
     "eslint:fix": "eslint --fix src/**/*.js",
     "prettier": "prettier --config .prettierrc --write ./src/*.js ./src/**/*.json"
   },
   "dependencies": {
-    "codemirror": "^5.29.0",
-    "loadjs": "^3.5.2"
+    "codemirror": "^5.29.0"
   },
   "main": "dist/v-codemirror.js",
   "module": "dist/v-codemirror.es.js",

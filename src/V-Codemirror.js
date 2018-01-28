@@ -5,25 +5,6 @@ import { normalizeModeName } from './util'
 import defaultConfig from './config/default'
 import themes from './config/theme'
 import events from './config/events'
-import loadjs from 'loadjs'
-
-function asyncLoad(resources, name) {
-  return new Promise((resolve, reject) => {
-    if (loadjs.isDefined(name)) {
-      resolve()
-    } else {
-      loadjs(resources, name, {
-        success() {
-          resolve()
-        },
-        error() {
-          progress.done()
-          reject(new Error('network error'))
-        }
-      })
-    }
-  })
-}
 
 const DEFAULT_OPTIONS = {
   theme: defaultConfig.theme,
