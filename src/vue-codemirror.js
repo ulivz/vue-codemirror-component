@@ -67,7 +67,7 @@ export default function createComponent({
 
     watch: {
       value (newVal) {
-        if (newVal !== this.editor.getValue()) {
+        if (newVal !== this.editor && this.editor.getValue()) {
           var scrollInfo = this.editor.getScrollInfo()
           this.editor.setValue(newVal)
           this.value = newVal
