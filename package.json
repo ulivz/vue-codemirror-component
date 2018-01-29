@@ -1,7 +1,7 @@
 {
   "name": "vue-codemirror-component",
   "description": "A vue-codemirror component that natively supports the code split",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "<ULIVZ chl814@foxmail.com>",
   "scripts": {
     "dev": "poi",

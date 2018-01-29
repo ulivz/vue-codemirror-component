@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/ulivz/v-codemirror/compare/v1.1.0...v1.1.1) (2018-01-29)
+
+
+### Bug Fixes
+
+* change the default mode to 'javascript' and fix a undefined bug ([ed51c7d](https://github.com/ulivz/v-codemirror/commit/ed51c7d))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/ulivz/v-codemirror/compare/v1.0.10...v1.1.0) (2018-01-29)
 
