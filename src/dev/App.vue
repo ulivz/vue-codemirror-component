@@ -4,12 +4,12 @@
             <select v-model="theme">
                 <option v-for="theme in themes">{{ theme }}</option>
             </select>
-            <select v-model="lang">
-                <option v-for="lang in languages">{{ lang }}</option>
+            <select v-model="mode">
+                <option v-for="mode in modes">{{ mode.name }}</option>
             </select>
             <V-Codemirror v-model="code"
                           :theme="theme"
-                          :mode="lang"
+                          :mode="mode"
                           :options="editorOpts">
             </V-Codemirror>
         </div>
@@ -17,19 +17,19 @@
 </template>
 
 <script>
-  import { VCodemirror, themes, mimeModes, modes, languages } from '../index'
+  import { themes, modes } from '../index'
 
   export default {
     name: 'app',
     components: {
-      'V-Codemirror': VCodemirror
+//      'V-Codemirror': VCodemirror
     },
     data () {
       return {
         code: require('!raw-loader!../../index.html'),
         themes,
-        languages,
-        lang: 'html',
+        modes,
+        mode: 'html',
         theme: 'monokai',
         editorOpts: {
           showToolkit: true,

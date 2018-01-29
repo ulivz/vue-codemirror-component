@@ -22,7 +22,6 @@ module.exports = {
       config.output.publicPath(process.env.CDN_ENV || 'https://unpkg.com/@' + pkg.version + pkg.name + '/dist')
     }
   },
-  library: true,
   production: {
     sourceMap: false,
     extractCSS: false

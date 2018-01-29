@@ -1,31 +1,17 @@
-import VCodemirror from './V-Codemirror.js'
+import createComponent from './V-Codemirror.js'
 import themes from './config/theme'
-import languages from './config/language'
-import Codemirror from 'codemirror'
-import { findMode } from './util'
-import { modes, mimeModes } from 'codemirror'
+import { normalizeModeName } from './util'
+import { modeInfo } from 'codemirror'
 
-function install(Vue) {
-  Vue.component(VCodemirror.name, VCodemirror)
+function install(Vue, options = {}) {
+  const VueCodemirrorComponent = createComponent(options)
+  Vue.component(VueCodemirrorComponent.name, VueCodemirrorComponent)
 }
 
-const findModeByMIME = Codemirror.findModeByMIME
-const findModeByExtension = Codemirror.findModeByExtension
-const findModeByFileName = Codemirror.findModeByFileName
-const findModeByName = Codemirror.findModeByName
-
 export {
-  themes,
-  languages,
-  // Current available modes
-  modes,
-  // Current available MIMEs
-  mimeModes,
   install as default,
-  VCodemirror,
-  findMode,
-  findModeByMIME,
-  findModeByExtension,
-  findModeByFileName,
-  findModeByName
+  modeInfo as modes, // All available modes
+  themes, // All available themes
+  createComponent,
+  normalizeModeName,
 }

@@ -3,7 +3,7 @@
 </p>
 
 <p align="center" style="color: #d73a49">
-  A laconic codemirror component for Vue.js
+  A vue-codemirror component that natively supports the code split
 </p>
 
 
