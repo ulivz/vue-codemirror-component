@@ -3,61 +3,82 @@
 </p>
 
 <p align="center" style="color: #d73a49">
-  A vue-codemirror component that natively supports the code split
+  A @vuejs component for @codemirror  that natively supports the code splitting.
 </p>
-
 
 <br/>
 
+## Why need code splitting?
+
+[codemirror](http://codemirror.net/) itself is a very powerful package that does not bundle into a single file when it's released. This is also because many users are most likely to load only some of them, **loading all at once is not elegant enough.** so that we can combine the [dynamic import](https://webpack.js.org/guides/code-splitting/#dynamic-imports) feature of webpack2+ to achieve the goal of reducing the size effectively.
+
 ## Quick Start
 
-If you use `webpack`, you need install `css-loader` and `style-loader` first:
+As above mentioned, to use this component, you need to use **_webpack2_** and above version.
 
-```bash
-npm install --save-dev css-loader style-loader
-``` 
+<details>
+<summary>Click here to open webpack configuration</summary>
 
-And add config in your `webpack.config.js`:
+1. Install webpack, css-loader and style-loader.
 
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      }
-    ]
+  ```bash
+  npm i install webpack -D
+  ```
+
+2. Config in `webpack.config.js`:
+
+  ```js
+  module.exports = {
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [ 'style-loader', 'css-loader' ]
+        }
+      ]
+    }
   }
-}
-```
+  ```
+
+</details>
+
+Then, show you the usage code:
 
 If you want to register `V-Codemirror` as a global component, you can use:
 
 ```js
-  import VCodemirror from 'v-codemirror' // default export is the install function
-  Vue.use(VCodemirror)
+import VueCodemirror from 'vue-codemirror-component'
+
+Vue.use(VueCodemirror, {
+  loadTheme(theme) {
+    return import('codemirror/theme/' + theme + '.css')
+  },
+  loadMode(mode) {
+    return import('codemirror/mode/' + mode + '/' + mode + '.js')
+  }
+})
 ```
 
 Or If you don't want to pollute the global scope, you can register it when you want to use it:
 
 ```js
-  import {VCodemirror} from 'v-codemirror' // VCodemirror is a property in export object
+  import { createComponent } from 'vue-codemirror-component'
+  
   export default {
     name: 'app',
     components: {
-      'V-Codemirror': VCodemirror
+      'vue-codemirror': createComponent(options)
     }
   }  
 ```
 
-A simple usage example as follows:
+A full usage example as follows:
 
 ```vue
 <template>
   <div class="simple-editor">
     <div class="editor">
-      <V-Codemirror v-model="code" :options="editorOpts"></V-Codemirror>
+      <vue-codemirror v-model="code" :options="editorOpts"></vue-codemirror>
     </div>
     <div class="preview">
       <pre v-html="code"></pre>
@@ -66,11 +87,21 @@ A simple usage example as follows:
 </template>
 
 <script>
-  import VCodemirror from 'v-codemirror'
+  import { createComponent } from 'vue-codemirror-component'
+  
+  const vueCodemiiror = createComponent({
+    loadTheme(theme) {
+      return import('codemirror/theme/' + theme + '.css')
+    },
+    loadMode(mode) {
+      return import('codemirror/mode/' + mode + '/' + mode + '.js')
+    }
+  })  
+
 
   export default {
     components: {
-      'V-Codemirror': VCodemirror
+      vueCodemiiror
     },
     data () {
       return {

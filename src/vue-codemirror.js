@@ -18,11 +18,11 @@ export default function createComponent({
                                         }) {
 
   return {
-    template: `<div class="V-Codemirror" style="height: 100%; width: 100%">
+    template: `<div class="vue-codemirror" style="height: 100%; width: 100%">
                 <textarea ref="editor"></textarea>
             </div>`,
 
-    name: 'V-Codemirror',
+    name: 'vue-codemirror',
 
     props: {
       value: String,

@@ -1,4 +1,4 @@
-import createComponent from './V-Codemirror.js'
+import createComponent from './vue-codemirror.js'
 import themes from './config/theme'
 import { normalizeModeName } from './util'
 import { modeInfo } from 'codemirror'
