@@ -1,11 +1,11 @@
 {
-  "name": "v-codemirror",
-  "description": "A laconic codemirror component for Vue.js",
-  "version": "1.0.10",
-  "author": "chl814@foxmail.com",
+  "name": "vue-codemirror-component",
+  "description": "A vue-codemirror component that natively supports the code split",
+  "version": "1.1.0",
+  "author": "<ULIVZ chl814@foxmail.com>",
   "scripts": {
     "dev": "poi",
-    "build": "poi build",
+    "build": "bili",
     "eslint": "eslint *.js src/**/*.js",
     "eslint:fix": "eslint --fix src/**/*.js",
     "prettier": "prettier --config .prettierrc --write ./src/*.js ./src/**/*.json"
@@ -13,8 +13,8 @@
   "dependencies": {
     "codemirror": "^5.29.0"
   },
-  "main": "dist/v-codemirror.js",
-  "module": "dist/v-codemirror.es.js",
+  "main": "dist/vue-codemirror-component.js",
+  "module": "dist/vue-codemirror-component.es.js",
   "files": [
     ".media",
     "src",

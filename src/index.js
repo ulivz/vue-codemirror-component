@@ -1,12 +1,14 @@
 import createComponent from './vue-codemirror.js'
 import themes from './config/theme'
 import { normalizeModeName } from './util'
-import { modeInfo } from 'codemirror'
+import codemirror from 'codemirror'
 
 function install(Vue, options = {}) {
   const VueCodemirrorComponent = createComponent(options)
   Vue.component(VueCodemirrorComponent.name, VueCodemirrorComponent)
 }
+
+const modeInfo = codemirror.modeInfo
 
 export {
   install as default,

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueCodemirror from '../index'
+import VueCodemirror from '../../dist/vue-codemirror-component.es'
 
 Vue.use(VueCodemirror, {
   loadTheme(theme) {
