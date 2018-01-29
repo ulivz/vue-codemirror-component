@@ -42,28 +42,21 @@ As above mentioned, to use this component, you need to use **_webpack2_** and ab
 
 </details>
 
+<br>
+
 Then, show you the usage code:
 
 If you want to register `V-Codemirror` as a global component, you can use:
 
 ```js
 import VueCodemirror from 'vue-codemirror-component'
-
-Vue.use(VueCodemirror, {
-  loadTheme(theme) {
-    return import('codemirror/theme/' + theme + '.css')
-  },
-  loadMode(mode) {
-    return import('codemirror/mode/' + mode + '/' + mode + '.js')
-  }
-})
+Vue.use(VueCodemirror, options)
 ```
 
-Or If you don't want to pollute the global scope, you can register it when you want to use it:
+Or if you don't want to pollute the global scope, you can register it when you want to use it:
 
 ```js
   import { createComponent } from 'vue-codemirror-component'
-  
   export default {
     name: 'app',
     components: {
@@ -71,6 +64,46 @@ Or If you don't want to pollute the global scope, you can register it when you w
     }
   }  
 ```
+
+## API
+
+### Default export
+
+  default export is the install function for this component.
+
+  ```js
+  import VueCodemirror from 'vue-codemirror-component'
+  Vue.use(VueCodemirror, options)
+  ```
+  
+#### options.loadTheme
+
+- Type: `(theme: string): Promise<void>`
+- Required: `true`
+
+  Runs when the editor's theme changes, you can use the `import()` syntax, and you can also use a third-party asynchronous load library.
+  
+  ```js
+  loadTheme(theme) {
+    return import('codemirror/theme/' + theme + '.css')
+  }
+  ```
+
+#### options.loadMode
+
+- Type: `(mode: string): Promise<void>`
+- Required: `true`
+
+  Runs when the editor's mode changes, the usage is same to _**options.loadTheme**_.
+  
+  ```js
+  loadTheme(theme) {
+    return import('codemirror/theme/' + theme + '.css')
+  }
+  ```
+
+
+## Example
 
 A full usage example as follows:
 
