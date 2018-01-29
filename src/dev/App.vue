@@ -7,11 +7,11 @@
             <select v-model="mode">
                 <option v-for="mode in modes">{{ mode.name }}</option>
             </select>
-            <V-Codemirror v-model="code"
+            <vue-codemirror v-model="code"
                           :theme="theme"
                           :mode="mode"
                           :options="editorOpts">
-            </V-Codemirror>
+            </vue-codemirror>
         </div>
     </div>
 </template>

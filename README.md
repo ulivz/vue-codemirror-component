@@ -1,9 +1,9 @@
 <p align="center">
-  <img alt="logo.svg" width="300" src="https://cdn.rawgit.com/ulivz/v-codemirror/master/media/logo.svg">
+  <img alt="vue-codemirror-logo" width="300" src=".media/logo.png">
 </p>
 
 <p align="center" style="color: #d73a49">
-  A @vuejs component for @codemirror  that natively supports the code splitting.
+  A <b>@vuejs</b> component for <b>@codemirror</b> that natively supports the code splitting.
 </p>
 
 <br/>
@@ -46,7 +46,7 @@ As above mentioned, to use this component, you need to use **_webpack2_** and ab
 
 Then, show you the usage code:
 
-If you want to register `V-Codemirror` as a global component, you can use:
+If you want to register `vue-codemirror` as a global component, you can use:
 
 ```js
 import VueCodemirror from 'vue-codemirror-component'
@@ -81,7 +81,7 @@ Or if you don't want to pollute the global scope, you can register it when you w
 - Type: `(theme: string): Promise<void>`
 - Required: `true`
 
-  Runs when the editor's theme changes, you can use the `import()` syntax, and you can also use a third-party asynchronous load library.
+  Runs when the editor's theme changes, you can use the `import()` syntax, and also supports a third-party asynchronous load library.
   
   ```js
   loadTheme(theme) {

@@ -16,7 +16,6 @@ export default function createComponent({
                                           loadTheme,
                                           loadMode
                                         }) {
-
   return {
     template: `<div class="vue-codemirror" style="height: 100%; width: 100%">
                 <textarea ref="editor"></textarea>
@@ -135,17 +134,6 @@ export default function createComponent({
         }
       },
 
-      // loadTheme() {
-      //   let { theme } = this.editorOptions
-      //   // theme config
-      //   if (theme && theme == 'solarized light') {
-      //     theme = 'solarized'
-      //   }
-      //   if (theme) {
-      //     return require('codemirror/theme/' + theme + '.css')
-      //   }
-      // },
-
       loadMode() {
         let { mode } = this.editorOptions
         const isCustomMode = !!CodeMirror.modes[mode]
@@ -158,19 +146,6 @@ export default function createComponent({
           return loadMode && loadMode(mode)
         }
       },
-
-      // loadMode() {
-      //   let { mode } = this.editorOptions
-      //   const isCustomMode = !!CodeMirror.modes[mode]
-      //
-      //   if (!mode && !isCustomMode) {
-      //     console.log(`Unknown mode: '${this.mode}', refer to http://codemirror.net/mode/ for more details.`)
-      //   }
-      //
-      //   if (mode) {
-      //     return require('codemirror/mode/' + mode + '/' + mode + '.js')
-      //   }
-      // },
 
       initializeEditor() {
         this.editor = CodeMirror.fromTextArea(this.$refs.editor, this.editorOptions)
