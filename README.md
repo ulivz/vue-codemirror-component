@@ -1,12 +1,4 @@
-<p align="center">
-  <img alt="vue-codemirror-logo" width="300" src=".media/logo.png">
-</p>
-
-<p align="center" style="color: #d73a49">
-  A <b>@vuejs</b> component for <b>@codemirror</b> that natively supports the code splitting.
-</p>
-
-<br/>
+# vue-codemirror-component
 
 ## Why need code splitting?
 
@@ -14,10 +6,12 @@
 
 ## Quick Start
 
-As above mentioned, to use this component, you need to use **_webpack2_** and above version.
+As above mentioned, to use this component, you need to use **_webpack2_** or above version.
 
 <details>
 <summary>Click here to open webpack configuration</summary>
+
+<br>
 
 1. Install webpack, css-loader and style-loader.
 
@@ -53,7 +47,7 @@ import VueCodemirror from 'vue-codemirror-component'
 Vue.use(VueCodemirror, options)
 ```
 
-Or if you don't want to pollute the global scope, you can register it when you want to use it:
+Or if you don't want to pollute the global scope, you can register it at where you want to use it:
 
 ```js
   import { createComponent } from 'vue-codemirror-component'

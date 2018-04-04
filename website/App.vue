@@ -31,7 +31,7 @@
     name: 'app',
     data () {
       return {
-        code: require('!raw-loader!../poi.config.js'),
+        code: require('!raw-loader!../config/poi.common.config.js'),
         themes,
         modes,
         mode: 'JavaScript',

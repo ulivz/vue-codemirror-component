@@ -1,12 +1,11 @@
 const nodeModules = require('webpack-node-modules')
 const repoLatestCommit = require('repo-latest-commit')
-const pkg = require('./package')
+const pkg = require('../package.json')
 const minify = require('babel-minify')
 
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: isProd ? 'src/index.js' : 'examples/index.js',
   templateCompiler: true,
   extendWebpack(config) {
     // Improve build performance.
