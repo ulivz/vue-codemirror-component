@@ -6,7 +6,7 @@ const minify = require('babel-minify')
 const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: isProd ? 'src/index.js' : 'src/dev/index.js',
+  entry: isProd ? 'src/index.js' : 'examples/index.js',
   templateCompiler: true,
   extendWebpack(config) {
     // Improve build performance.

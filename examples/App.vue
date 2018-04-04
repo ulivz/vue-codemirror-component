@@ -1,41 +1,50 @@
 <template>
     <div id="app">
+        <header>
+            <h1>vue-codemirror-component</h1>
+            <div class="tool-box">
+                Choose a theme:
+                <select v-model="theme">
+                    <option v-for="theme in themes">{{ theme }}</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;
+                Choose a mode:
+                <select v-model="mode">
+                    <option v-for="mode in modes">{{ mode.name }}</option>
+                </select>
+            </div>
+        </header>
         <div class="editor-wrap">
-            <select v-model="theme">
-                <option v-for="theme in themes">{{ theme }}</option>
-            </select>
-            <select v-model="mode">
-                <option v-for="mode in modes">{{ mode.name }}</option>
-            </select>
             <vue-codemirror v-model="code"
-                          :theme="theme"
-                          :mode="mode"
-                          :options="editorOpts">
+                            :theme="theme"
+                            :mode="mode"
+                            :options="editorOpts">
             </vue-codemirror>
         </div>
     </div>
 </template>
 
 <script>
-  import { themes, modes } from '../index'
+  import { themes, modes } from '../src/index'
 
   export default {
     name: 'app',
-    components: {
-//      'V-Codemirror': VCodemirror
+    created() {
+      this.code = ''
+    },
+    mounted() {
+
     },
     data () {
       return {
-        code: require('!raw-loader!../../index.html'),
+        code: require('!raw-loader!../index.html'),
         themes,
         modes,
-        mode: 'html',
+        mode: 'javascript',
         theme: 'monokai',
         editorOpts: {
           showToolkit: true,
           styleActiveLine: true,
-//          keyMap: "sublime",
-//          extraKeys: { 'Ctrl': 'autocomplete' },
           line: true,
           lineNumbers: true,
           autoCloseTags: true,
@@ -78,6 +87,13 @@
 
     #app {
         height: 100%;
+    }
+
+    header {
+        padding: 0 20px;
+        .tool-box {
+            height: 40px;
+        }
     }
 
     .editor-wrap {
