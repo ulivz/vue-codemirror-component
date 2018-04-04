@@ -29,33 +29,22 @@
 
   export default {
     name: 'app',
-    created() {
-      this.code = ''
-    },
-    mounted() {
-
-    },
     data () {
       return {
-        code: require('!raw-loader!../index.html'),
+        code: require('!raw-loader!../poi.config.js'),
         themes,
         modes,
-        mode: 'javascript',
+        mode: 'JavaScript',
         theme: 'monokai',
         editorOpts: {
-          showToolkit: true,
           styleActiveLine: true,
           line: true,
-          lineNumbers: true,
+//          lineNumbers: true,
           autoCloseTags: true,
-          // 代码折叠
           foldGutter: true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-          // 选中文本自动高亮，及高亮方式
           styleSelectedText: true,
           highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
-          // more codemirror options...
-          // 如果有hint方面的配置，也应该出现在这里
           hintOptions: {
             completeSingle: false
           }
@@ -97,38 +86,14 @@
     }
 
     .editor-wrap {
-        position: relative;
-        float: left;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
+        box-sizing: border-box;
+        height: calc(100% - 110px);
         .CodeMirror {
-            padding: 45px;
-            font-size: 18px;
             height: 100%;
-        }
-    }
-
-    .preview-wrap {
-        float: left;
-        width: 50%;
-        height: 100%;
-        overflow: auto;
-        .markdown-body {
-            box-sizing: border-box;
-            width: 100%;
-            max-width: 980px;
             padding: 45px;
-            font-size: 18px;
-            ul > li {
-                list-style-type: disc;
-            }
-            ol > li {
-                list-style-type: lower-roman;
-            }
-            pre {
-                margin: 0;
-            }
+            box-sizing: border-box;
+            font-size: 16px;
+            font-weight: lighter;
         }
     }
 </style>

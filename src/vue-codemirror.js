@@ -40,14 +40,14 @@ export default function createComponent({
     },
 
     created() {
-      this.loadPromises = Promise.all([
+      this.loadQueue = Promise.all([
         this.loadMode(),
         this.loadTheme()
       ])
     },
 
     mounted () {
-      this.loadPromises.then(() => {
+      this.loadQueue.then(() => {
         this.initializeEditor(this.editorOptions)
       })
     },
