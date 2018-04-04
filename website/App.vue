@@ -54,7 +54,7 @@
   }
 </script>
 
-<style lang="scss">
+<style>
     html,
     body {
         margin: 0px;
@@ -81,23 +81,30 @@
     header {
         padding: 0 20px;
         margin-bottom: 20px;
-        .tool-box {
-            line-height: 30px;
-        }
+
+    }
+
+    header.tool-box {
+        line-height: 30px;
     }
 
     .editor-wrap {
         box-sizing: border-box;
         height: calc(100% - 110px);
+
+    }
+
+    .CodeMirror {
+        height: 100%;
+        padding: 45px;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-weight: lighter;
+    }
+
+    @media screen and (max-width: 1024px) {
         .CodeMirror {
-            height: 100%;
-            padding: 45px;
-            box-sizing: border-box;
-            font-size: 16px;
-            font-weight: lighter;
-            @media screen and (max-width: 1024px) {
-                padding: 20px;
-            }
+            padding: 20px;
         }
     }
 </style>
