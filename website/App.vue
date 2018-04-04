@@ -80,8 +80,9 @@
 
     header {
         padding: 0 20px;
+        margin-bottom: 20px;
         .tool-box {
-            height: 40px;
+            line-height: 30px;
         }
     }
 
@@ -94,6 +95,9 @@
             box-sizing: border-box;
             font-size: 16px;
             font-weight: lighter;
+            @media screen and (max-width: 1024px) {
+                padding: 20px;
+            }
         }
     }
 </style>
