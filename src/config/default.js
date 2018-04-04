@@ -1,4 +1,4 @@
 export default {
   'theme': 'monokai',
-  'mode': 'javascript'
+  'mode': 'JavaScript'
 }
