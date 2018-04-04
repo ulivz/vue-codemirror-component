@@ -17,9 +17,6 @@ module.exports = {
       .add(nodeModules())
 
     config.node.set('fs', 'empty')
-    if (isProd) {
-      config.output.publicPath(process.env.CDN_ENV || 'https://unpkg.com/@' + pkg.version + pkg.name + '/dist')
-    }
   },
   production: {
     sourceMap: false,
