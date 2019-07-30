@@ -1,5 +1,7 @@
 # vue-codemirror-component
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ulivz/vue-codemirror-component.svg)](https://greenkeeper.io/)
+
 ## Why need code splitting?
 
 [codemirror](http://codemirror.net/) itself is a very powerful package that does not bundle into a single file when it's released. This is also because many users are most likely to load only some of them, **loading all at once is not elegant enough.** so that we can combine the [dynamic import](https://webpack.js.org/guides/code-splitting/#dynamic-imports) feature of webpack2+ to achieve the goal of reducing the size effectively.
