@@ -22,16 +22,16 @@
     "dist"
   ],
   "devDependencies": {
-    "babel-minify": "^0.2.0",
+    "babel-minify": "^0.5.0",
     "babel-preset-vue": "^2.0.0",
-    "bili": "^2.2.0",
-    "eslint": "^4.8.0",
-    "inquirer": "^3.3.0",
-    "poi": "^9.6.13",
+    "bili": "^4.8.1",
+    "eslint": "^6.1.0",
+    "inquirer": "^6.5.0",
+    "poi": "^12.7.1",
     "poi-preset-babel-minify": "^1.0.3",
     "poi-preset-bundle-report": "^2.0.2",
     "prettier": "^1.7.0",
-    "raw-loader": "^0.5.1",
+    "raw-loader": "^3.1.0",
     "repo-latest-commit": "^1.0.0",
     "webpack-node-modules": "^0.1.1"
   }
